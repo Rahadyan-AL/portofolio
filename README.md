@@ -1,2 +1,2 @@
 # portofolio
-My own website is on progress. Lest goo!!!
+My own website is on progress. Lest goo
