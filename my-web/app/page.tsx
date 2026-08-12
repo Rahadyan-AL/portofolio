@@ -8,11 +8,14 @@ import { AuroraText } from "@/components/ui/aurora-text"
 import { RainbowButton } from "@/components/ui/rainbow-button"
 import { TextAnimate } from "@/components/ui/text-animate"
 import { LightRays } from "@/components/ui/light-rays"
+import { SparklesText } from "@/components/ui/sparkles-text"
+import { DiaTextReveal } from "@/components/ui/dia-text-reveal"
 
 
 export default function Home() {
   const router = useRouter();
-  const title = "My personal website";
+
+
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden bg-zinc-950 text-white">
@@ -21,32 +24,19 @@ export default function Home() {
         <Meteors number={70} />
       </div>
 
+
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-6">
 
-        <h1 className="text-center">
-          <TypingAnimation
-            showCursor={false}
-            className="text-3xl font-medium text-white md:text-5xl"
-          >
-            Welcome to
-          </TypingAnimation>
-
-          <span className="block" />
-
-          <AuroraText className="text-3xl font-bold md:text-5xl">
-            
-              My personal website
-            
-          </AuroraText>
+        <h1 className="text-center text-3xl font-bold md:text-5xl">
+          <AuroraText>Welcome to My website {""}</AuroraText>
+          
         </h1>
 
 
         <RainbowButton
-          
           onClick={() => router.push("/landing")}
           className="mt-4 bg-blue-500 px-6 py-3 text-lg font-bold text-white hover:bg-blue-700"
-        >
-          Get Started
+        >Get Started
         </RainbowButton>
       </div>
 
