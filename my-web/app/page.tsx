@@ -1,45 +1,44 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { Meteors } from "@/components/ui/meteors";
-import { TypingAnimation } from "@/components/ui/typing-animation";
-import { AuroraText } from "@/components/ui/aurora-text"
-import { RainbowButton } from "@/components/ui/rainbow-button"
-import { TextAnimate } from "@/components/ui/text-animate"
-import { LightRays } from "@/components/ui/light-rays"
-import { SparklesText } from "@/components/ui/sparkles-text"
-import { DiaTextReveal } from "@/components/ui/dia-text-reveal"
+import { MainLayout } from "@/components\/layout/MainLayout";
+import { useI18n } from "@/lib/i18n";
 
-
-export default function Home() {
-  const router = useRouter();
-
-
+export default function HomePage() {
+  const { t } = useI18n();
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-zinc-950 text-white">
-      <LightRays />
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <Meteors number={70} />
+    <MainLayout>
+      <div className="flex min-h-[70vh] flex-col items-center justify-center px-5 py-16 text-center lg:pl-[260px] lg:pr-10 lg:items-center">
+        <span
+          className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
+          style={{ fontFamily: "var(--font-jetbrains), monospace" }}
+        >
+          {t("home.kicker")}
+        </span>
+        <p
+          className="mt-4 max-w-[400px] text-[15px] leading-relaxed text-white\/55"
+          style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
+        >
+          {t("home.subtitle")}
+        </p>
+
+        {/* hint — collectible akan aktif Tahap 4 */}
+        <p
+          className="mt-8 font-mono text-xs text-white\/30"
+          style={{ fontFamily: "var(--font-jetbrains), monospace" }}
+        >
+          psst... ada sesuatu yang berkedip di sekitar sini
+        </p>
+
+        {/* placeholder collectible demo — non-functional until Tahap 4 */}
+        <div
+          className="mt-4 text-2xl opacity-20 select-none"
+          style={{ animation: "graffiti-pulse 1.6s ease-in-out infinite" }}
+          title="placeholder koleksi — aktif Tahap 4"
+        >
+          🎨
+        </div>
       </div>
-
-
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center gap-6">
-
-        <h1 className="text-center text-3xl font-bold md:text-5xl">
-          <AuroraText>Welcome to My website {""}</AuroraText>
-          
-        </h1>
-
-
-        <RainbowButton
-          onClick={() => router.push("/landing")}
-          className="mt-4 bg-blue-500 px-6 py-3 text-lg font-bold text-white hover:bg-blue-700"
-        >Get Started
-        </RainbowButton>
-      </div>
-
-    </div>
+    </MainLayout>
   );
 }

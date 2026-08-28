@@ -1,32 +1,58 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Bungee, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { AppProviders } from "@/components/layout/AppProviders";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bungee = Bungee({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-bungee",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  variable: "--font-space",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
 });
 
 export const metadata: Metadata = {
-  title: "Rahadyan Al | Portfolio",
-  description: "Personal portfolio website of Rahadyan Al Farisi, showcasing projects, skills, and experience in web development.",
+  title: "Rahadyan Al Farisi — Portfolio",
+  description:
+    "Portfolio game x graffiti milik Rahadyan Al Farisi — Fullstack Developer. Temukan project, skill, dan sertifikat dengan pengalaman interaktif.",
+  openGraph: {
+    title: "Rahadyan Al Farisi — Portfolio",
+    description:
+      "Portfolio game x graffiti — Fullstack Developer. Ada koleksi tersembunyi & easter egg di dalamnya.",
+    type: "website",
+    locale: "id_ID",
+  },
+  // TODO_PLACEHOLDER_FAVICON: ganti dengan favicon RF graffiti setelah PRD & build awal selesai
+  // Gunakan favicon.io atau realfavicongenerator.net
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      lang="id"
+      className={cn(
+        "h-full antialiased dark",
+        bungee.variable,
+        spaceGrotesk.variable,
+        jetbrainsMono.variable
+      )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body
+        className="min-h-full flex flex-col brick-bg"
+        style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
+      >
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }
