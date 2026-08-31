@@ -8,18 +8,19 @@ import { AudioScreen } from "./AudioScreen";
 import {
   isSessionValid,
   markSession,
-  setAudioEnabled,
   getStoredLanguage,
   setStoredLanguage,
   type Language,
 } from "@/lib/storage";
 import { useI18n } from "@/lib/i18n";
+import { useAudio } from "@/components/audio/AudioProvider";
 
 type Step = "loading" | "logo" | "language" | "audio" | "done" | "checking";
 
 export function IntroFlow({ children }: { children: React.ReactNode }) {
   const [step, setStep] = useState<Step>("checking");
   const { setLang } = useI18n();
+  const { setEnabled: setAudio } = useAudio();
   const [pendingDeepLink, setPendingDeepLink] = useState<string | null>(null);
 
   // Check session validity on mount
@@ -52,25 +53,12 @@ export function IntroFlow({ children }: { children: React.ReactNode }) {
 
   const handleAudioSelect = useCallback(
     (enabled: boolean) => {
-      setAudioEnabled(enabled);
+      setAudio(enabled);
       markSession();
-      // Ensure language is persisted even if user didn't change
       const currentLang = getStoredLanguage();
       if (currentLang) setLang(currentLang);
 
-      // Play placeholder audio if enabled — will be implemented properly in Tahap 6
-      // TODO_PLACEHOLDER_AUDIO: real audio element will be added in Tahap 6
-      if (enabled) {
-        // Try to play placeholder if exists, fail silently
-        const audio = new Audio("/audio/bg-loop.mp3");
-        audio.loop = true;
-        audio.volume = 0.3;
-        audio.play().catch(() => {});
-      }
-
-      // Deep link redirect after intro if needed
       if (pendingDeepLink && pendingDeepLink !== "/") {
-        // Small spray wipe before redirect
         setTimeout(() => {
           window.location.href = pendingDeepLink;
         }, 400);
@@ -78,7 +66,7 @@ export function IntroFlow({ children }: { children: React.ReactNode }) {
 
       setStep("done");
     },
-    [pendingDeepLink, setLang]
+    [pendingDeepLink, setLang, setAudio]
   );
 
   // Debug helper for QA: allow ?intro=1 to force intro

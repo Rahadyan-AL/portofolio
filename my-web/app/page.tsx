@@ -1,9 +1,11 @@
 "use client";
 
-import { MainLayout } from "@/components\/layout/MainLayout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { useI18n } from "@/lib/i18n";
+import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 export default function HomePage() {
+  usePageAchievement();
   const { t } = useI18n();
 
   return (
@@ -16,21 +18,19 @@ export default function HomePage() {
           {t("home.kicker")}
         </span>
         <p
-          className="mt-4 max-w-[400px] text-[15px] leading-relaxed text-white\/55"
+          className="mt-4 max-w-[400px] text-[15px] leading-relaxed text-white/55"
           style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
         >
           {t("home.subtitle")}
         </p>
 
-        {/* hint — collectible akan aktif Tahap 4 */}
         <p
-          className="mt-8 font-mono text-xs text-white\/30"
+          className="mt-8 font-mono text-xs text-white/30"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
           psst... ada sesuatu yang berkedip di sekitar sini
         </p>
 
-        {/* placeholder collectible demo — non-functional until Tahap 4 */}
         <div
           className="mt-4 text-2xl opacity-20 select-none"
           style={{ animation: "graffiti-pulse 1.6s ease-in-out infinite" }}

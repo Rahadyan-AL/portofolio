@@ -5,6 +5,9 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { SideNav } from "./SideNav";
 import { SettingsPanel } from "./SettingsPanel";
+import { useAchievements } from "@/components/achievements/AchievementContext";
+import { useCollectibles } from "@/components/collectibles/CollectiblesContext";
+import { CollectibleSpawner } from "@/components/collectibles/CollectibleSpawner";
 
 export function MainLayout({
   children,
@@ -14,6 +17,8 @@ export function MainLayout({
   hideStash?: boolean;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { unlocked } = useAchievements();
+  const { total: collectTotal, sprayCount, codeCount } = useCollectibles();
 
   return (
     <div className="relative min-h-screen overflow-hidden brick-bg">
@@ -61,15 +66,19 @@ export function MainLayout({
         </div>
       )}
 
+      {/* hidden collectible spawner — random posisi, opacity rendah + pulse, auto-vanish 7s */}
+      <CollectibleSpawner />
+
       {/* content */}
       <div className="relative z-10 max-[900px]:px-6 max-[900px]:pt-4">{children}</div>
 
-      {/* stash badges — trophy & bag placeholder (akan hidup Tahap 3-4) */}
+      {/* stash badges — trophy shows achievement count, bag placeholder for koleksi Tahap 4 */}
       {!hideStash && (
-        <div className="pointer-events-none fixed bottom-8 right-10 z-10 hidden gap-4 lg:flex">
-          <div
-            className="relative flex h-[64px] w-[64px] flex-col items-center justify-center"
-            title="Achievement — placeholder"
+        <div className="fixed bottom-8 right-10 z-10 hidden gap-4 lg:flex">
+          <Link
+            href="/achievements"
+            className="relative flex h-[64px] w-[64px] flex-col items-center justify-center hover:scale-105 transition-transform"
+            title={`${unlocked.length} achievement terbuka — klik untuk lihat`}
           >
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
               <path
@@ -81,18 +90,18 @@ export function MainLayout({
               />
             </svg>
             <span className="text-[20px]" style={{ fontFamily: "var(--font-bungee), cursive", color: "var(--gold)" }}>
-              —
+              {unlocked.length}
             </span>
             <span
-              className="text-[8px] tracking-[1px] text-white\/50"
+              className="text-[8px] tracking-[1px] text-white/50"
               style={{ fontFamily: "var(--font-jetbrains), monospace" }}
             >
               TROFI
             </span>
-          </div>
+          </Link>
           <div
             className="relative flex h-[64px] w-[64px] flex-col items-center justify-center"
-            title="Koleksi — placeholder"
+            title={`Koleksi ${collectTotal}/20 — spray ${sprayCount}/10, code ${codeCount}/10`}
           >
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
               <path
@@ -104,10 +113,10 @@ export function MainLayout({
               />
             </svg>
             <span className="text-[20px]" style={{ fontFamily: "var(--font-bungee), cursive", color: "var(--gold)" }}>
-              —
+              {collectTotal}
             </span>
             <span
-              className="text-[8px] tracking-[1px] text-white\/50"
+              className="text-[8px] tracking-[1px] text-white/50"
               style={{ fontFamily: "var(--font-jetbrains), monospace" }}
             >
               KOLEKSI

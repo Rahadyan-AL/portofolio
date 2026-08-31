@@ -1,11 +1,13 @@
 "use client";
 
-import { MainLayout } from "@/components\/layout/MainLayout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { certificates } from "@/data/certificates";
+import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 const ROTATIONS = ["1.2deg", "-1.5deg", "0.8deg", "-1deg", "1deg"];
 
 export default function SertifikatPage() {
+  usePageAchievement();
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
@@ -32,20 +34,17 @@ export default function SertifikatPage() {
                 transform: `rotate(${ROTATIONS[idx % ROTATIONS.length]})`,
               }}
             >
-              <div className="mb-3.5 flex h-[150px] items-center justify-center rounded border-2 border-dashed border-white\/25 p-2.5 text-center">
+              <div className="mb-3.5 flex h-[150px] items-center justify-center rounded border-2 border-dashed border-white/25 p-2.5 text-center">
                 <span
-                  className="text-[11px] leading-relaxed text-white\/35"
+                  className="text-[11px] leading-relaxed text-white/35"
                   style={{ fontFamily: "var(--font-jetbrains), monospace" }}
                 >
                   SCAN/FOTO
                   <br />
                   SERTIFIKAT DI SINI
                   <br />
-                  <span className="text-[10px] text-white\/20">{c.image}</span>
+                  <span className="text-[10px] text-white/20">{c.image}</span>
                 </span>
-                {/* TODO: ganti art-slot dengan:
-                    <img src={c.image} alt={c.title} className="h-[150px] w-full object-cover rounded" />
-                */}
               </div>
 
               <div
@@ -54,7 +53,7 @@ export default function SertifikatPage() {
               >
                 {c.title}
               </div>
-              <div className="mb-1 text-xs text-white\/55">{c.issuer}</div>
+              <div className="mb-1 text-xs text-white/55">{c.issuer}</div>
               <div
                 className="text-[11px] text-[var(--gold)]"
                 style={{ fontFamily: "var(--font-jetbrains), monospace" }}
@@ -66,10 +65,10 @@ export default function SertifikatPage() {
         </div>
 
         <p
-          className="mt-8 text-[11px] leading-relaxed text-white\/25"
+          className="mt-8 text-[11px] leading-relaxed text-white/25"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          Tambah sertifikat baru: edit <code className="text-white\/40">data/certificates.ts</code> — tambah 1 object.
+          Tambah sertifikat baru: edit <code className="text-white/40">data/certificates.ts</code>.
         </p>
       </div>
     </MainLayout>

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next\/navigation";
+import { usePathname } from "next/navigation";
 import { useI18n } from "@/lib/i18n";
+import { playClick, playDenied, playHover } from "@/lib/audio";
 
 type NavItem = {
   key: string;
@@ -76,7 +77,9 @@ export function SideNav({
           return (
             <div
               key={item.key}
-              className="relative w-fit select-none"
+              onClick={() => playDenied()}
+              onMouseEnter={() => playHover()}
+              className="relative w-fit select-none cursor-pointer"
               style={{
                 ...commonStyle,
                 color: "rgba(232,54,43,0.55)",
@@ -97,9 +100,13 @@ export function SideNav({
           <Link
             key={item.key}
             href={item.href}
-            onClick={onNavigate}
+            onClick={() => {
+              playClick();
+              onNavigate?.();
+            }}
+            onMouseEnter={() => playHover()}
             className={`relative w-fit cursor-pointer select-none transition-colors ${
-              active ? "text-[var(--gold)]" : "text-white\/50 hover:text-[var(--cream)]"
+              active ? "text-[var(--gold)]" : "text-white/50 hover:text-[var(--cream)]"
             }`}
             style={commonStyle}
           >

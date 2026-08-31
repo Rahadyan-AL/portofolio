@@ -1,10 +1,10 @@
 "use client";
 
-import { MainLayout } from "@/components\/layout/MainLayout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { skillClusters } from "@/data/skills";
+import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 function hexForColor(color: string): string {
-  // map css var to hex for simpleicons cdn
   if (color.includes("gold")) return "FFC93C";
   if (color.includes("pink")) return "FF2E93";
   if (color.includes("purple")) return "6B21D8";
@@ -13,6 +13,7 @@ function hexForColor(color: string): string {
 }
 
 export default function SkillPage() {
+  usePageAchievement();
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1100px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
@@ -33,12 +34,11 @@ export default function SkillPage() {
           {skillClusters.map((cluster) => (
             <div key={cluster.label} className="mb-11">
               <div
-                className="mb-3.5 text-xs tracking-[3px] text-white\/40"
+                className="mb-3.5 text-xs tracking-[3px] text-white/40"
                 style={{ fontFamily: "var(--font-jetbrains), monospace" }}
               >
                 {cluster.label}
               </div>
-              {/* tag wall — sprayed skill words, varied size/rotation/color, no boxes */}
               <div className="flex flex-wrap items-baseline gap-x-[22px] gap-y-1.5">
                 {cluster.items.map((skill) => {
                   const iconColor = hexForColor(skill.color);
@@ -56,7 +56,7 @@ export default function SkillPage() {
                     >
                       {skill.iconSlug && (
                         <img
-                          src={`https:\/\/cdn.simpleicons.org\/${skill.iconSlug}\/${iconColor}`}
+                          src={`https://cdn.simpleicons.org/${skill.iconSlug}/${iconColor}`}
                           alt=""
                           className="h-[1em] w-[1em] shrink-0"
                           style={{ filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.45))" }}
@@ -77,11 +77,11 @@ export default function SkillPage() {
         </div>
 
         <p
-          className="mt-8 text-[11px] leading-relaxed text-white\/25"
+          className="mt-8 text-[11px] leading-relaxed text-white/25"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          Logo pakai cdn.simpleicons.org — ganti <code className="text-white\/40">iconSlug</code> & warna di{" "}
-          <code className="text-white\/40">data/skills.ts</code> untuk nambah skill baru.
+          Logo pakai cdn.simpleicons.org — ganti <code className="text-white/40">iconSlug</code> & warna di{" "}
+          <code className="text-white/40">data/skills.ts</code> untuk nambah skill baru.
         </p>
       </div>
     </MainLayout>

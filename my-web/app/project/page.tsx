@@ -1,11 +1,13 @@
 "use client";
 
-import { MainLayout } from "@/components\/layout/MainLayout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { projects } from "@/data/projects";
+import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 const ROTATIONS = ["-1.5deg", "1deg", "-0.8deg", "1.2deg", "-1deg"];
 
 export default function ProjectPage() {
+  usePageAchievement();
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
@@ -32,21 +34,17 @@ export default function ProjectPage() {
                 transform: `rotate(${ROTATIONS[idx % ROTATIONS.length]})`,
               }}
             >
-              {/* art-slot — ganti dengan <img src={p.screenshot}> */}
-              <div className="mb-3.5 flex h-[150px] items-center justify-center rounded border-2 border-dashed border-white\/25 p-2.5 text-center">
+              <div className="mb-3.5 flex h-[150px] items-center justify-center rounded border-2 border-dashed border-white/25 p-2.5 text-center">
                 <span
-                  className="text-[11px] leading-relaxed text-white\/35"
+                  className="text-[11px] leading-relaxed text-white/35"
                   style={{ fontFamily: "var(--font-jetbrains), monospace" }}
                 >
                   THUMBNAIL
                   <br />
                   PROJECT DI SINI
                   <br />
-                  <span className="text-[10px] text-white\/20">{p.screenshot}</span>
+                  <span className="text-[10px] text-white/20">{p.screenshot}</span>
                 </span>
-                {/* TODO: ganti div art-slot di atas dengan:
-                    <img src={p.screenshot} alt={p.title} className="h-[150px] w-full object-cover rounded" />
-                */}
               </div>
 
               <div
@@ -55,13 +53,13 @@ export default function ProjectPage() {
               >
                 {p.title}
               </div>
-              <p className="mb-3 text-[13px] leading-relaxed text-white\/60">{p.description}</p>
+              <p className="mb-3 text-[13px] leading-relaxed text-white/60">{p.description}</p>
 
               <div className="mb-3.5 flex flex-wrap gap-2.5">
                 {p.techStack.map((tag) => (
                   <span
                     key={tag}
-                    className="relative pl-3 text-[11px] text-white\/70"
+                    className="relative pl-3 text-[11px] text-white/70"
                     style={{ fontFamily: "var(--font-jetbrains), monospace" }}
                   >
                     <span className="absolute left-0 top-1 h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
@@ -95,11 +93,10 @@ export default function ProjectPage() {
         </div>
 
         <p
-          className="mt-8 text-[11px] leading-relaxed text-white\/25"
+          className="mt-8 text-[11px] leading-relaxed text-white/25"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          Tambah project baru: edit <code className="text-white\/40">data/projects.ts</code> — tambah 1 object, tidak perlu
-          ubah kode tampilan.
+          Tambah project baru: edit <code className="text-white/40">data/projects.ts</code> — tambah 1 object.
         </p>
       </div>
     </MainLayout>
