@@ -8,6 +8,7 @@ import { SettingsPanel } from "./SettingsPanel";
 import { useAchievements } from "@/components/achievements/AchievementContext";
 import { useCollectibles } from "@/components/collectibles/CollectiblesContext";
 import { CollectibleSpawner } from "@/components/collectibles/CollectibleSpawner";
+import { GrandFinale } from "@/components/collectibles/GrandFinale";
 
 export function MainLayout({
   children,
@@ -68,6 +69,7 @@ export function MainLayout({
 
       {/* hidden collectible spawner — random posisi, opacity rendah + pulse, auto-vanish 7s */}
       <CollectibleSpawner />
+      <GrandFinale />
 
       {/* content */}
       <div className="relative z-10 max-[900px]:px-6 max-[900px]:pt-4">{children}</div>

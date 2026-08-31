@@ -54,6 +54,7 @@ export function resetProgress(): void {
   localStorage.removeItem(STORAGE_KEYS.ACHIEVEMENTS);
   localStorage.removeItem(STORAGE_KEYS.COLLECTIBLES_SPRAY);
   localStorage.removeItem(STORAGE_KEYS.COLLECTIBLES_CODE);
+  localStorage.removeItem("portfolio:grandFinaleShown");
 }
 
 export function resetAllForTesting(): void {
@@ -61,5 +62,6 @@ export function resetAllForTesting(): void {
   localStorage.removeItem(STORAGE_KEYS.ACHIEVEMENTS);
   localStorage.removeItem(STORAGE_KEYS.COLLECTIBLES_SPRAY);
   localStorage.removeItem(STORAGE_KEYS.COLLECTIBLES_CODE);
+  localStorage.removeItem("portfolio:grandFinaleShown");
   // bahasa & audio tetap biar gampang tes, tapi bisa di-reset manual kalau mau
 }

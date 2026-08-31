@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/lib/i18n";
 import type { Language } from "@/lib/storage";
+import { playClick } from "@/lib/audio";
 
 export function LanguageScreen({
   onNext,
@@ -11,6 +12,7 @@ export function LanguageScreen({
   const { lang, setLang, t } = useI18n();
 
   const pick = (l: Language) => {
+    playClick();
     setLang(l);
     onNext(l);
   };

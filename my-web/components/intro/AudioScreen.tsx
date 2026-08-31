@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { playClick } from "@/lib/audio";
 
 export function AudioScreen({
   onSelect,
@@ -40,7 +41,10 @@ export function AudioScreen({
 
         <div className="flex gap-4 w-full justify-center">
           <button
-            onClick={() => onSelect(true)}
+            onClick={() => {
+              playClick();
+              onSelect(true);
+            }}
             className="flex-1 max-w-[200px] py-5 text-[18px] tracking-widest bg-[var(--gold)] text-[var(--bg-dark)] hover:bg-[#ffd76a] transition-colors cursor-pointer select-none"
             style={{
               fontFamily: "var(--font-bungee), cursive",
@@ -51,7 +55,10 @@ export function AudioScreen({
             🔊 {t("intro.audio.on")}
           </button>
           <button
-            onClick={() => onSelect(false)}
+            onClick={() => {
+              playClick();
+              onSelect(false);
+            }}
             className="flex-1 max-w-[200px] py-5 text-[18px] tracking-widest bg-white/5 text-[var(--cream)] border border-white/10 hover:bg-white/10 hover:border-white/20 transition-colors cursor-pointer select-none"
             style={{
               fontFamily: "var(--font-bungee), cursive",

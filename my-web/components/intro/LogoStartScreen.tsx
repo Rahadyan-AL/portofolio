@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { playClick } from "@/lib/audio";
 
 export function LogoStartScreen({ onStart }: { onStart: () => void }) {
   const { t } = useI18n();
@@ -35,7 +36,10 @@ export function LogoStartScreen({ onStart }: { onStart: () => void }) {
         </div>
 
         <button
-          onClick={onStart}
+          onClick={() => {
+            playClick();
+            onStart();
+          }}
           className="group relative mt-2 inline-flex items-center justify-center px-10 py-4 text-[18px] font-black tracking-widest text-[var(--bg-dark)] bg-[var(--gold)] hover:bg-[#ffd76a] transition-colors cursor-pointer select-none"
           style={{
             fontFamily: "var(--font-bungee), cursive",
