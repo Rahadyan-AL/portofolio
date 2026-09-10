@@ -7,7 +7,7 @@ export default function AboutPage() {
   usePageAchievement();
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[1100px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
+      <div className="mx-auto max-w-[1100px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
         <div className="flex flex-wrap items-start gap-[60px] max-[900px]:flex-col">
           <div
             className="flex h-[320px] w-[260px] shrink-0 items-center justify-center rounded-[6px] border-2 border-dashed border-white/25 p-5 text-center leading-relaxed"
@@ -33,11 +33,11 @@ export default function AboutPage() {
               <br />
               SAYA
             </h1>
-            <p className="mt-4 max-w-[520px] text-[15px] leading-7 text-white/75">
+            <p className="mt-4 max-w-[520px] text-[15px] leading-7 text-white/85">
               [Tulis cerita singkat tentang diri kamu di sini — siapa kamu, apa yang kamu kerjakan, dan kenapa kamu
               suka bikin sesuatu.]
             </p>
-            <p className="mt-4 max-w-[520px] text-[15px] leading-7 text-white/75">
+            <p className="mt-4 max-w-[520px] text-[15px] leading-7 text-white/85">
               [Paragraf kedua, bisa cerita perjalanan belajar coding atau hal personal lain yang mau ditonjolkan.]
             </p>
 

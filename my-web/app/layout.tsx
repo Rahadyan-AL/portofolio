@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rahadyan Al Farisi — Portfolio",
     description:
-      "Portfolio game x graffiti — Fullstack Developer. Ada koleksi tersembunyi & easter egg di dalamnya.",
+      "Portfolio game x graffiti — Fullstack Developer. Temukan project, skill, dan sertifikat dengan pengalaman interaktif.",
     type: "website",
     locale: "id_ID",
   },

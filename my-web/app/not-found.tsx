@@ -12,14 +12,7 @@ export default function NotFound() {
         <div className="absolute top-[60%] left-[40%] w-[320px] h-[120px] rounded-[40%_60%_55%_45%_/_60%_40%_60%_40%] bg-[var(--gold)] blur-[40px] opacity-[0.04]" />
       </div>
 
-      <Link
-        href="/"
-        onClick={() => playClick()}
-        className="absolute top-[30px] left-[56px] z-10 max-[900px]:left-6 max-[900px]:top-5"
-        style={{ fontFamily: "var(--font-bungee), cursive" }}
-      >
-        <span className="graffiti-wordmark text-[24px]">RAHADYAN</span>
-      </Link>
+
 
       <div className="relative z-10 flex flex-col items-center gap-6">
         <div
@@ -30,7 +23,7 @@ export default function NotFound() {
         </div>
         <div className="h-[12px] w-[60%] rounded-[40%_60%_55%_45%_/_60%_40%_60%_40%] bg-[var(--pink)] opacity-60 -mt-4" />
         <p
-          className="max-w-[420px] text-sm leading-relaxed text-white/60"
+          className="max-w-[420px] text-sm leading-relaxed text-white/80"
           style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
         >
           Dinding ini kosong — halaman yang kamu cari tidak ada atau sudah dicat ulang.

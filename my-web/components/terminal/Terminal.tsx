@@ -18,7 +18,7 @@ const WELCOME_LINES: string[] = [
   "[0] Keluar Terminal    -> exit",
   "",
   "Ketik command di atas dan tekan Enter. Tekan ESC atau ketik 'exit' untuk keluar.",
-  "Psst... ada 1 command tersembunyi 😉",
+  "sudo",
 ];
 
 export function Terminal({ open, onClose }: { open: boolean; onClose: () => void }) {

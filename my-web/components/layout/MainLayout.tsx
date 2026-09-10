@@ -29,14 +29,7 @@ export function MainLayout({
         <div className="absolute bottom-[15%] left-[10%] w-[260px] h-[260px] rounded-full bg-[var(--pink)] blur-[70px] opacity-8" />
       </div>
 
-      {/* brand */}
-      <Link
-        href="/"
-        className="absolute top-[30px] left-[56px] z-20 max-[900px]:left-6 max-[900px]:top-5"
-        style={{ fontFamily: "var(--font-bungee), cursive" }}
-      >
-        <span className="graffiti-wordmark text-[24px] max-[900px]:text-[20px]">RAHADYAN</span>
-      </Link>
+
 
       {/* topbar: mobile menu trigger + settings */}
       <div className="relative z-20 flex justify-end items-center gap-3 px-10 py-[26px] max-[900px]:px-6 max-[900px]:py-4">
@@ -56,7 +49,7 @@ export function MainLayout({
 
       {/* mobile overlay */}
       {mobileOpen && (
-        <div className="absolute inset-0 z-30 flex flex-col bg-[var(--bg-dark)]\/95 backdrop-blur-md px-6 pt-20 pb-8 lg:hidden">
+        <div className="absolute inset-0 z-30 flex flex-col bg-[var(--bg-dark)]/95 backdrop-blur-md px-6 pt-20 pb-8 min-[901px]:hidden max-[900px]:flex">
           <button
             onClick={() => setMobileOpen(false)}
             className="absolute top-5 right-6 h-9 w-9 flex items-center justify-center rounded-full border border-white\/15 bg-white\/5 text-white\/70"
@@ -74,9 +67,9 @@ export function MainLayout({
       {/* content */}
       <div className="relative z-10 max-[900px]:px-6 max-[900px]:pt-4">{children}</div>
 
-      {/* stash badges — trophy shows achievement count, bag placeholder for koleksi Tahap 4 */}
+      {/* stash badges — trophy shows achievement count, bag */}
       {!hideStash && (
-        <div className="fixed bottom-8 right-10 z-10 hidden gap-4 lg:flex">
+        <div className="fixed bottom-8 right-10 z-10 hidden gap-4 min-[901px]:flex">
           <Link
             href="/achievements"
             className="relative flex h-[64px] w-[64px] flex-col items-center justify-center hover:scale-105 transition-transform"

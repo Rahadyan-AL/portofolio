@@ -11,10 +11,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Moklet Event Center",
-    screenshot: "/images/projects/moklet.png",
-    description: "[Deskripsi singkat project, 1-2 kalimat. Ganti dengan deskripsi asli.]",
-    techStack: ["Next.js", "NestJS", "Expo"],
-    sourceCode: "https://github.com/...",
+    screenshot: "/images/projects/mec.webp",
+    description: "Aplikasi mobile untuk mengelola dan mengikuti kegiatan lomba di lingkungan SMK Telkom Malang. Moklet Event Center (MEC) menyediakan satu tempat bagi siswa, panitia, dan admin kesiswaan untuk mengakses event, pendaftaran lomba, pengumuman, serta data operasional.",
+    techStack: ["React Native", "Expo"],
+    sourceCode: "https://github.com/Rahadyan-AL/Moklet-Event-Center-Front-End",
     // demoLink tidak diisi -> tombol demo tidak tampil
   },
   {

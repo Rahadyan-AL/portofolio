@@ -10,7 +10,7 @@ export default function SertifikatPage() {
   usePageAchievement();
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
+      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
         <span
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
@@ -53,7 +53,7 @@ export default function SertifikatPage() {
               >
                 {c.title}
               </div>
-              <div className="mb-1 text-xs text-white/55">{c.issuer}</div>
+              <div className="mb-1 text-xs text-white/80">{c.issuer}</div>
               <div
                 className="text-[11px] text-[var(--gold)]"
                 style={{ fontFamily: "var(--font-jetbrains), monospace" }}

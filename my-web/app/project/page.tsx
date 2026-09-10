@@ -10,7 +10,7 @@ export default function ProjectPage() {
   usePageAchievement();
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
+      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
         <span
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
@@ -34,17 +34,31 @@ export default function ProjectPage() {
                 transform: `rotate(${ROTATIONS[idx % ROTATIONS.length]})`,
               }}
             >
-              <div className="mb-3.5 flex h-[150px] items-center justify-center rounded border-2 border-dashed border-white/25 p-2.5 text-center">
-                <span
-                  className="text-[11px] leading-relaxed text-white/35"
-                  style={{ fontFamily: "var(--font-jetbrains), monospace" }}
-                >
-                  THUMBNAIL
-                  <br />
-                  PROJECT DI SINI
-                  <br />
-                  <span className="text-[10px] text-white/20">{p.screenshot}</span>
-                </span>
+              <div className="mb-3.5 h-[150px] overflow-hidden rounded border border-white/10 bg-black/20">
+                <img
+                  src={p.screenshot}
+                  alt={p.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    const img = e.currentTarget as HTMLImageElement;
+                    img.style.display = "none";
+                    const fallback = img.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.classList.remove("hidden");
+                  }}
+                />
+                <div className="hidden flex h-full items-center justify-center rounded border-2 border-dashed border-white/25 p-2.5 text-center">
+                  <span
+                    className="text-[11px] leading-relaxed text-white/35"
+                    style={{ fontFamily: "var(--font-jetbrains), monospace" }}
+                  >
+                    THUMBNAIL
+                    <br />
+                    PROJECT DI SINI
+                    <br />
+                    <span className="text-[10px] text-white/20">{p.screenshot}</span>
+                  </span>
+                </div>
               </div>
 
               <div
@@ -53,13 +67,13 @@ export default function ProjectPage() {
               >
                 {p.title}
               </div>
-              <p className="mb-3 text-[13px] leading-relaxed text-white/60">{p.description}</p>
+              <p className="mb-3 text-[13px] leading-relaxed text-white/80">{p.description}</p>
 
               <div className="mb-3.5 flex flex-wrap gap-2.5">
                 {p.techStack.map((tag) => (
                   <span
                     key={tag}
-                    className="relative pl-3 text-[11px] text-white/70"
+                    className="relative pl-3 text-[11px] text-white/85"
                     style={{ fontFamily: "var(--font-jetbrains), monospace" }}
                   >
                     <span className="absolute left-0 top-1 h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
@@ -75,7 +89,7 @@ export default function ProjectPage() {
                   rel="noreferrer"
                   className="text-[13px] font-bold text-[var(--pink)] hover:underline"
                 >
-                  Lihat detail →
+                  Lihat source code →
                 </a>
                 {p.demoLink && (
                   <a

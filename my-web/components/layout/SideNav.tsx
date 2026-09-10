@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useI18n } from "@/lib/i18n";
 import { playClick, playDenied, playHover } from "@/lib/audio";
 import { useCollectibles } from "@/components/collectibles/CollectiblesContext";
@@ -19,11 +19,11 @@ type NavItem = {
 };
 
 const NAV: NavItem[] = [
-  { key: "home", labelKey: "nav.home", href: "/", size: 24, rotate: "-2deg", smear: "var(--purple)" },
-  { key: "about", labelKey: "nav.about", href: "/about", size: 26, rotate: "1.5deg", smear: "var(--gold)" },
-  { key: "skill", labelKey: "nav.skill", href: "/skill", size: 23, rotate: "-1deg", smear: "var(--pink)" },
-  { key: "project", labelKey: "nav.project", href: "/project", size: 26, rotate: "2deg", smear: "var(--purple)" },
-  { key: "sertifikat", labelKey: "nav.certificate", href: "/sertifikat", size: 22, rotate: "-1.8deg", smear: "var(--gold)" },
+  { key: "home", labelKey: "nav.home", href: "/", size: 32, rotate: "-2deg", smear: "var(--purple)" },
+  { key: "about", labelKey: "nav.about", href: "/about", size: 34, rotate: "1.5deg", smear: "var(--gold)" },
+  { key: "skill", labelKey: "nav.skill", href: "/skill", size: 31, rotate: "-1deg", smear: "var(--pink)" },
+  { key: "project", labelKey: "nav.project", href: "/project", size: 33, rotate: "2deg", smear: "var(--purple)" },
+  { key: "sertifikat", labelKey: "nav.certificate", href: "/sertifikat", size: 30, rotate: "-1.8deg", smear: "var(--gold)" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -39,6 +39,7 @@ export function SideNav({
   variant?: "desktop" | "mobile";
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { t } = useI18n();
   const { sprayCount, codeCount } = useCollectibles();
 
@@ -53,14 +54,14 @@ export function SideNav({
     <nav
       className={
         variant === "desktop"
-          ? "absolute left-[56px] top-1/2 -translate-y-1/2 z-10 hidden flex-col gap-[22px] lg:flex"
+          ? "absolute left-[56px] top-1/2 -translate-y-1/2 z-20 flex max-[900px]:hidden flex-col gap-[22px]"
           : "flex flex-col gap-5"
       }
     >
       {NAV.map((item) => {
         const active = isActive(pathname, item.href);
         const label = t(item.labelKey);
-        const fontSize = active ? 31 : item.size;
+        const fontSize = active ? item.size + 6 : item.size;
 
         const commonStyle: React.CSSProperties = {
           fontFamily: "var(--font-bungee), cursive",
@@ -80,13 +81,27 @@ export function SideNav({
           <Link
             key={item.key}
             href={item.href}
-            onClick={() => {
-              playClick();
+            prefetch={false}
+            onClick={(e) => {
+              try {
+                playClick();
+              } catch {}
               onNavigate?.();
+              // fallback: pastikan navigasi via router juga jalan walau Link terhalang overlay
+              if (!e.defaultPrevented) {
+                // biarkan Link handle, tapi juga trigger router sebagai backup
+                setTimeout(() => {
+                  if (window.location.pathname !== item.href) router.push(item.href);
+                }, 50);
+              }
             }}
-            onMouseEnter={() => playHover()}
+            onMouseEnter={() => {
+              try {
+                playHover();
+              } catch {}
+            }}
             className={`relative w-fit cursor-pointer select-none transition-colors ${
-              active ? "text-[var(--gold)]" : "text-white/50 hover:text-[var(--cream)]"
+              active ? "text-[var(--gold)]" : "text-white/80 hover:text-[var(--cream)]"
             }`}
             style={commonStyle}
           >
@@ -111,7 +126,7 @@ export function SideNav({
           className="relative w-fit cursor-pointer select-none text-[var(--gold)] hover:text-[#ffd76a] transition-colors"
           style={{
             fontFamily: "var(--font-bungee), cursive",
-            fontSize: 21,
+            fontSize: 28,
             transform: "rotate(1deg)",
             textShadow: "2px 2px 0 var(--purple-deep), 5px 5px 0 var(--pink)",
           }}
@@ -137,7 +152,7 @@ export function SideNav({
           className="relative w-fit select-none cursor-pointer"
           style={{
             fontFamily: "var(--font-bungee), cursive",
-            fontSize: 21,
+            fontSize: 28,
             transform: "rotate(1deg)",
             color: "var(--red)",
             textShadow: "2px 2px 0 rgba(0,0,0,0.5)",
@@ -159,7 +174,7 @@ export function SideNav({
           className="relative w-fit select-none cursor-pointer"
           style={{
             fontFamily: "var(--font-bungee), cursive",
-            fontSize: 21,
+            fontSize: 28,
             transform: "rotate(1deg)",
             color: "var(--cream)",
             textShadow: "2px 2px 0 rgba(0,0,0,0.5)",
@@ -181,7 +196,7 @@ export function SideNav({
           className="relative w-fit select-none cursor-pointer"
           style={{
             fontFamily: "var(--font-bungee), cursive",
-            fontSize: 21,
+            fontSize: 28,
             transform: "rotate(1deg)",
             color: "rgba(232,54,43,0.55)",
             textShadow: "2px 2px 0 rgba(0,0,0,0.5)",

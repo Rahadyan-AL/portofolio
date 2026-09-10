@@ -47,14 +47,14 @@ export function AchievementProvider({ children }: { children: React.ReactNode })
     };
   }, [refresh]);
 
-  // popup queue handling — show one at a time for 3.5s
+  // popup queue handling — show one at a time for 5s (auto-dismiss, tidak stuck)
   useEffect(() => {
     if (current) return;
     if (queue.length === 0) return;
     const next = queue[0];
     setCurrent(next);
     setQueue((q) => q.slice(1));
-    const t = setTimeout(() => setCurrent(null), 3500);
+    const t = setTimeout(() => setCurrent(null), 5000);
     return () => clearTimeout(t);
   }, [queue, current]);
 
@@ -84,7 +84,7 @@ export function AchievementProvider({ children }: { children: React.ReactNode })
               if (!beforeAll) {
                 setTimeout(() => {
                   setQueue((q) => [...q, { id: allDef.id, name: allDef.name, trigger: allDef.trigger }]);
-                }, 3800);
+                }, 5200);
               }
             }
           }

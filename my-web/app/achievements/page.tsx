@@ -11,7 +11,7 @@ export default function AchievementsPage() {
 
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[900px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 lg:pl-[260px]">
+      <div className="mx-auto max-w-[900px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
         <span
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
