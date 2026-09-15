@@ -2,15 +2,13 @@
 
 import { MainLayout } from "@/components/layout/MainLayout";
 import { certificates } from "@/data/certificates";
-import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 const ROTATIONS = ["1.2deg", "-1.5deg", "0.8deg", "-1deg", "1deg"];
 
 export default function SertifikatPage() {
-  usePageAchievement();
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
+      <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8">
         <span
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}

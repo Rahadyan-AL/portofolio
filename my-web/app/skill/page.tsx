@@ -2,7 +2,6 @@
 
 import { MainLayout } from "@/components/layout/MainLayout";
 import { skillClusters } from "@/data/skills";
-import { usePageAchievement } from "@/hooks/usePageAchievement";
 
 function hexForColor(color: string): string {
   if (color.includes("gold")) return "FFC93C";
@@ -13,10 +12,9 @@ function hexForColor(color: string): string {
 }
 
 export default function SkillPage() {
-  usePageAchievement();
   return (
     <MainLayout>
-      <div className="mx-auto max-w-[1100px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8 min-[901px]:pl-[260px]">
+      <div className="mx-auto max-w-[1100px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8">
         <span
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}

@@ -24,11 +24,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Rahadyan Al Farisi — Portfolio",
   description:
-    "Portfolio game x graffiti milik Rahadyan Al Farisi — Fullstack Developer. Temukan project, skill, dan sertifikat dengan pengalaman interaktif.",
+    "Portfolio graffiti milik Rahadyan Al Farisi — Fullstack Developer. Lihat project, skill, dan sertifikat.",
   openGraph: {
     title: "Rahadyan Al Farisi — Portfolio",
     description:
-      "Portfolio game x graffiti — Fullstack Developer. Temukan project, skill, dan sertifikat dengan pengalaman interaktif.",
+      "Portfolio graffiti — Fullstack Developer. Lihat project, skill, dan sertifikat.",
     type: "website",
     locale: "id_ID",
   },
