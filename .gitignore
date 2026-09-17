@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+/my-web/node_modules
+
+# next
+/my-web/.next/
+my-web/out/
+
+# env
+.env*
+
