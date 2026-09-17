@@ -9,3 +9,8 @@ my-web/out/
 # env
 .env*
 
+
+# stray duplicate (my-web is the real app)
+/components/
+/public/lanyard/
+
