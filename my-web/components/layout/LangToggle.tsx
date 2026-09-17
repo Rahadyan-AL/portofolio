@@ -1,6 +1,6 @@
 "use client";
 
-import { useI18n } from "@/lib/i18n";
+import { useI18n } from "@/lib/translations";
 import type { Language } from "@/lib/storage";
 
 export function LangToggle() {

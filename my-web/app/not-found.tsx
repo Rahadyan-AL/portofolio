@@ -24,7 +24,7 @@ export default function NotFound() {
           className="mt-3 font-mono text-xs tracking-[0.2em] text-white/30"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          // page not found — spray another wall?
+          {/* page not found — spray another wall? */}
         </p>
         <Link
           href="/"

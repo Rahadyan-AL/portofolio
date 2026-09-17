@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useI18n } from "@/lib/i18n";
+import { useI18n } from "@/lib/translations";
 
 export const SOURCE_REPO_URL = "https://github.com/Rahadyan-AL/portofolio";
 

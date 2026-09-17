@@ -154,6 +154,7 @@
     @apply bg-background text-foreground;
     background-color: var(--bg-dark);
     color: var(--cream);
+    font-family: var(--font-space), Space Grotesk, sans-serif;
   }
   html {
     @apply font-sans;

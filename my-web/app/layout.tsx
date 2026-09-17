@@ -49,7 +49,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body
         className="min-h-full flex flex-col brick-bg"
-        style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
       >
         <AppProviders>{children}</AppProviders>
       </body>

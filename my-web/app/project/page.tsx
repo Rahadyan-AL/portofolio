@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { projects } from "@/data/projects";
 
 const ROTATIONS = ["-1.5deg", "1deg", "-0.8deg", "1.2deg", "-1deg"];
 
 export default function ProjectPage() {
+  const router = useRouter();
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8">
@@ -13,7 +15,7 @@ export default function ProjectPage() {
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          // karya-karya
+          {/* karya-karya */}
         </span>
         <h1
           className="graffiti-heading mt-2 text-[clamp(34px,5vw,56px)]"
@@ -25,8 +27,17 @@ export default function ProjectPage() {
         <div className="mt-8 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-9 gap-x-9">
           {projects.map((p, idx) => (
             <div
-              key={p.title + idx}
-              className="relative bg-[#1c171c] p-4 pb-5 shadow-[6px_6px_0_rgba(0,0,0,0.4)] transition-transform hover:scale-[1.03] hover:rotate-0"
+              key={p.slug}
+              role="link"
+              tabIndex={0}
+              onClick={() => router.push(`/project/${p.slug}`)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  router.push(`/project/${p.slug}`);
+                }
+              }}
+              className="relative block cursor-pointer bg-[#1c171c] p-4 pb-5 shadow-[6px_6px_0_rgba(0,0,0,0.4)] transition-transform hover:scale-[1.03] hover:rotate-0"
               style={{
                 clipPath: "polygon(3% 0%, 97% 2%, 100% 96%, 4% 100%, 0% 6%)",
                 transform: `rotate(${ROTATIONS[idx % ROTATIONS.length]})`,
@@ -80,11 +91,12 @@ export default function ProjectPage() {
                 ))}
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4" onClick={(e) => e.preventDefault()}>
                 <a
                   href={p.sourceCode}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
                   className="text-[13px] font-bold text-[var(--pink)] hover:underline"
                 >
                   Lihat source code →
@@ -94,11 +106,17 @@ export default function ProjectPage() {
                     href={p.demoLink}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="text-[13px] font-bold text-[var(--gold)] hover:underline"
                   >
                     Demo →
                   </a>
                 )}
+              </div>
+              <div className="absolute inset-0 flex items-end justify-end p-2 opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
+                <span className="rounded-full bg-white/10 px-2 py-1 text-[10px] tracking-widest text-white/70" style={{ fontFamily: "var(--font-jetbrains), monospace" }}>
+                  LIHAT DETAIL →
+                </span>
               </div>
             </div>
           ))}

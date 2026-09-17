@@ -2,17 +2,21 @@
 
 import Link from "next/link";
 import { MainLayout } from "@/components/layout/MainLayout";
-import { useI18n } from "@/lib/i18n";
+import { useI18n } from "@/lib/translations";
 import SplitText from "@/components/SplitText";
 import DecryptedText from "@/components/DecryptedText";
 import ElectricBorder from "@/components/ElectricBorder";
+import TextTypeRaw from "@/components/TextType/TextType";
+const TextType: any = TextTypeRaw;
 
 export default function HomePage() {
   const { t, lang } = useI18n();
 
   return (
     <MainLayout>
-      <div className="flex min-h-[70vh] flex-col items-center justify-center px-5 py-16 text-center lg:pr-10 lg:items-center">
+      <div className="flex min-h-[calc(100dvh-68px)] flex-col items-center justify-center px-5 py-8 text-center">
+        {/* spacer untuk truly center — dorong konten ke tengah viewport dikurangi navbar */}
+        <div className="flex flex-1 flex-col items-center justify-center py-6">
         <DecryptedText
           key={`kicker-${lang}`}
           text={t("home.kicker")}
@@ -38,12 +42,21 @@ export default function HomePage() {
           className="mt-3 text-[clamp(28px,6vw,44px)] leading-tight text-[var(--gold)] [text-shadow:2px_2px_0_var(--purple-deep),4px_4px_0_var(--pink)]"
         />
 
-        <p
-          className="mt-4 max-w-[400px] text-[15px] leading-relaxed text-white/80"
-          style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" }}
-        >
-          {t("home.subtitle")}
-        </p>
+        <TextType
+          key={`subtitle-${lang}`}
+          text={[t("home.subtitle")]}
+          as="p"
+          typingSpeed={22}
+          initialDelay={500}
+          pauseDuration={4000}
+          deletingSpeed={18}
+          loop={false}
+          showCursor
+          cursorCharacter="|"
+          cursorBlinkDuration={0.5}
+          className="mt-4 max-w-[480px] text-[15px] leading-relaxed text-white/80"
+          style={{ fontFamily: "var(--font-space), Space Grotesk, sans-serif" } as React.CSSProperties}
+        />
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <ElectricBorder color="#FFC93C" speed={1} chaos={0.12} borderRadius={6}>
@@ -63,6 +76,7 @@ export default function HomePage() {
           >
             {t("home.cta.certificates")}
           </Link>
+        </div>
         </div>
       </div>
     </MainLayout>

@@ -13,7 +13,7 @@ export default function SertifikatPage() {
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          // bukti perjalanan
+          {/* bukti perjalanan */}
         </span>
         <h1
           className="graffiti-heading mt-2 text-[clamp(34px,5vw,56px)]"

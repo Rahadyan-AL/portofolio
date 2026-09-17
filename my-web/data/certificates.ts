@@ -9,20 +9,33 @@ export interface Certificate {
 export const certificates: Certificate[] = [
   {
     title: "Sertifikat Kompetensi (UUK)\nFull Stack Developer",
-    image: "/images/certificates/uuk.png",
-    issuer: "[Nama penerbit / lembaga]",
-    date: "[Bulan, Tahun]",
+    image: "/images/sertifikat/sertif ukl.jpeg",
+    issuer: "[SMK Telkom Malang]",
+    date: "[Mei, 2026]",
   },
   {
-    title: "[Nama Sertifikat]",
-    image: "/images/certificates/placeholder.png",
-    issuer: "[Nama penerbit / lembaga]",
-    date: "[Bulan, Tahun]",
+    title: "[Coding Camp by DBS Foundation]",
+    image: "/images/sertifikat/coding_camp.png",
+    issuer: "[Dicoding X DBS foundation]",
+    date: "[Januari-Mei, 2026]",
   },
   {
-    title: "[Nama Sertifikat]",
-    image: "/images/certificates/placeholder.png",
-    issuer: "[Nama penerbit / lembaga]",
-    date: "[Bulan, Tahun]",
+    title: "[Cyber Security Awareness]",
+    image: "/images/sertifikat/cyber_security.png",
+    issuer: "[SMK Telkom Malang]",
+    date: "[Juni, 2024]",
   },
+  {
+    title: "[Bionix Competition]",
+    image: "/images/sertifikat/bionix.png",
+    issuer: "[Institut Teknologi Sepuluh November]",
+    date: "[September, 2025]",
+  },
+  {
+    title: "[Coming soon]",
+    image: "/images/sertifikat/.png",
+    issuer: "[-]",
+    date: "[-, -]",
+  },
+  
 ];
