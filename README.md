@@ -1,41 +1,25 @@
-# RAHADYAN — Portfolio Website 🎨🕹️
+# RAHADYAN — Portfolio Website 🎨
 
-> A personal portfolio that plays like a game and looks like it was tagged on a brick wall.
+> A personal portfolio with a street art soul — built with Next.js and animated with React Bits.
 
-Not your average one-page portfolio. This project blends a **game-like flow** (intro sequence, achievement system, hidden collectibles) with a **street art / graffiti visual identity** — built with Next.js.
-
-Live demo: _coming soon_
-Design mockups & full PRD: see `/docs`
+Live: `https://rahadyan-al.github.io/portofolio/`
 
 ---
 
-## ✨ Concept
+## ✨ About
 
-Instead of a static "scroll and read" portfolio, visitors get an actual **experience**:
-
-- A game-style intro (loading → logo/start screen → language select → audio on/off) before landing on the Home screen
-- A left-side navigation menu with loose, hand-tagged typography — no boxes, no borders, no icons
-- Hidden collectibles scattered across pages that visitors can hunt down
-- An achievement system that tracks exploration, patience, and curiosity
-- A couple of easter eggs for the terminal-and-devtools crowd 👀
-- A locked **"Source Code"** menu item that only unlocks once you've found everything
-
-Full detail on every mechanic lives in the PRD (`/docs/PRD-website-portfolio-rahadyan.md`).
+A graffiti-inspired portfolio focused on showing off projects and certificates clearly — bold typography, torn-flyer cards, and a dark brick-wall backdrop, without unnecessary gimmicks getting in the way of the content.
 
 ---
 
 ## 🧩 Features
 
-- 🎮 Game-style intro flow with session persistence (skips intro on repeat visits within 24h)
-- 🌐 Bilingual — Indonesian & English, switchable anytime, saved to `localStorage`
-- 🏆 Achievement system (page visits, time-on-page, hidden finds) with a dedicated Achievement page
-- 🎨 Two collectible types (spray cans & `</>` tags) hidden across pages, with a spray-paint reveal animation on discovery
-- 💻 Terminal easter egg — type `sudo` anywhere to open a fullscreen terminal menu
-- 🕵️ Hidden message in the browser dev console, for the curious
-- 🔊 Looping theme music + sound effects, with a full mute/volume control in Settings
-- 🔒 A "Source Code" nav item that stays locked until every collectible is found
-- 📱 Responsive nav — collapses into a single trigger button on mobile
-- 🧱 Data-driven Project & Certificate sections — add a new entry by editing one array, no UI code required
+- 🎨 Graffiti-inspired visual identity — layered hard-shadow typography (Bungee), torn-flyer style cards, a purple/gold/pink palette on a dark brick-textured background
+- 🌐 Bilingual — Indonesian & English, text centralized in `lib/text/`
+- ⚡ Animated with [React Bits](https://reactbits.dev/) — all components installed via the official MCP registry (not hand-copied), including DotGrid, GooeyNav, DecryptedText, SplitText, TextType, ElectricBorder, ProfileCard, SpotlightCard, FadeContent, ShinyText, and ClickSpark
+- 🧱 Data-driven Project & Certificate sections — add a new entry by editing one file, no UI code required
+- 📬 Working Contact form (Name / Email / Message) — submits through a static-site-friendly form service (Formspree/Web3Forms), since the site is statically exported
+- 🦶 Footer with contact links and a Privacy Policy page
 
 ---
 
@@ -43,25 +27,23 @@ Full detail on every mechanic lives in the PRD (`/docs/PRD-website-portfolio-rah
 
 | Layer | Tech |
 |---|---|
-| Framework | [Next.js](https://nextjs.org/) |
+| Framework | [Next.js](https://nextjs.org/) (static export, for GitHub Pages) |
 | Language | TypeScript |
 | Styling | Tailwind CSS |
-| Fonts | Bungee, Space Grotesk, JetBrains Mono (Google Fonts) |
+| Animation / UI | [React Bits](https://reactbits.dev/) (via MCP) |
+| Fonts | Bungee, Space Grotesk, JetBrains Mono |
 | Tech logos | [Simple Icons](https://simpleicons.org/) via `cdn.simpleicons.org` |
+| Deployment | GitHub Pages, via GitHub Actions |
 
 ---
 
 ## 🚀 Getting Started
 
 ```bash
-# clone the repo
-git clone https://github.com/Rahadyan-AL/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Rahadyan-AL/portofolio.git
+cd portofolio/my-web
 
-# install dependencies
 npm install
-
-# run the dev server
 npm run dev
 ```
 
@@ -72,46 +54,62 @@ Open [http://localhost:3000](http://localhost:3000) to view it.
 ## 📁 Project Structure (key parts)
 
 ```
-├── app/                     # pages (Next.js App Router)
+my-web/
+├── app/
+│   ├── page.tsx              # Home
 │   ├── about/
 │   ├── skill/
 │   ├── project/
+│   │   └── [slug]/           # project detail pages
 │   ├── certificates/
-│   └── source-code/         # locked page
-├── components/
-│   ├── nav/                 # side nav (desktop) + trigger menu (mobile)
-│   ├── settings/            # language, volume, reset progress
-│   ├── achievements/
-│   └── collectibles/
+│   ├── contact/               # contact form
+│   └── privacy-policy/
+├── components/                 # React Bits components (installed via MCP)
+│   ├── DotGrid/
+│   ├── GooeyNav/
+│   ├── ProfileCard/
+│   └── ...
+├── components/layout/
+│   ├── MainLayout.tsx          # background layers, page transitions
+│   ├── TopNav.tsx
+│   └── Footer.tsx
+├── lib/
+│   ├── text/                   # bilingual content, one file per page
+│   │   ├── home.ts
+│   │   ├── about.ts
+│   │   ├── skill.ts
+│   │   ├── project.ts
+│   │   ├── certificates.ts
+│   │   ├── contact.ts
+│   │   └── common.ts           # nav, footer, shared buttons
+│   └── storage.ts / utils.ts
 ├── data/
-│   ├── projects.ts          # add a new project = add one object here
-│   └── certificates.ts      # same idea for certificates
-└── docs/
-    └── PRD-website-portfolio-rahadyan.md
+│   ├── projects.ts             # add a new project = add one object here
+│   └── certificates.ts         # same idea for certificates
+└── components.json             # React Bits MCP registry trace
 ```
 
 > Adding a new **project** or **certificate** never requires touching UI code — just add an entry to the matching file in `/data`.
+> All copy lives in `lib/text/`, with matching `id`/`en` keys side by side per file — any placeholder still waiting to be filled in is marked `[ISI SENDIRI: ...]` / `[FILL IN: ...]`.
 
 ---
 
 ## 🚧 Roadmap / Still TBD
 
-A few things are intentionally left as placeholders for now:
-
-- [ ] Final names for 4 achievements (terminal find, dev console find, spray can set, `</>` set)
-- [ ] Actual hidden message content in the dev console easter egg
-- [ ] Favicon & OG image (graffiti-style "RF" monogram)
-- [ ] Real project screenshots, certificate scans, and bio content (currently placeholder)
-- [ ] Deployment target (currently local-only)
+- [ ] Fill in remaining placeholder copy across `lib/text/` (bio, project descriptions, etc.) in both languages
+- [ ] Add real project screenshots and certificate scans
+- [ ] Finish Formspree/Web3Forms account setup for the Contact form
+- [ ] Write real Privacy Policy content
+- [ ] Favicon (graffiti-style "R" monogram, still in progress)
 
 ---
 
 ## 📬 Contact
 
-- LinkedIn: [rahadyan-al-farisi-a71a45381](https://www.linkedin.com/in/rahadyan-al-farisi-a71a45381)
+- LinkedIn: [rahadyan-al-farisi](https://www.linkedin.com/in/rahadyan-al-farisi)
 - Instagram: [@rahadyan_al](https://instagram.com/rahadyan_al)
 - GitHub: [@Rahadyan-AL](https://github.com/Rahadyan-AL)
 
 ---
 
-<p align="center"><i>Built with Next.js, way too much CSS, and a genuine love for graffiti letterforms.</i></p>
+<p align="center"><i>Made by R.A.F, with react bits.</i></p>
