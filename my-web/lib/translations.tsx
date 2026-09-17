@@ -2,67 +2,45 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getStoredLanguage, setStoredLanguage, type Language } from "./storage";
+import { homeText } from "./text/home";
+import { aboutText } from "./text/about";
+import { skillText } from "./text/skill";
+import { projectText } from "./text/project";
+import { certificatesText } from "./text/certificates";
+import { contactText } from "./text/contact";
+import { commonText } from "./text/common";
 
 type Dictionary = Record<string, string>;
 
-// Semua key di bawah ini masih dipakai — dicek via grep t("key") di codebase
-// Hapus intro.* dan nav.hint yang sudah tidak terpakai (bekas intro flow / wheel hint)
-const dict: Record<Language, Dictionary> = {
-  id: {
-    "home.kicker": "// portfolio 2026",
-    "home.greeting": "SELAMAT DATANG!",
-    "home.subtitle":
-      "Fullstack developer, segala macam harus bisa Front End, Back End, Mobile, dan UI/UX designer.",
-    "home.cta.projects": "Lihat Project →",
-    "home.cta.certificates": "Lihat Sertifikat →",
-    "nav.home": "Beranda",
-    "nav.about": "Tentang",
-    "nav.skill": "Skill",
-    "nav.project": "Projek",
-    "nav.certificate": "Sertifikat",
-    "nav.sourceCode": "Source Code",
-    "nav.contact": "Kontak",
-    "contact.kicker": "// let's connect",
-    "contact.heading": "HIT ME UP",
-    "contact.subtitle": "Ada project, kerjaan, atau cuma mau ngobrol soal coding? Gas cari aku lewat salah satu ini.",
-    "contact.email": "Email",
-    "contact.github": "GitHub",
-    "contact.linkedin": "LinkedIn",
-    "contact.instagram": "Instagram",
-    "sourceModal.title": "Pindah ke Github?",
-    "sourceModal.desc":
-      "Link ini membuka repo GitHub portofolio ini di tab baru. Kamu tetap di halaman ini.",
-    "sourceModal.continue": "Lanjutkan",
-    "sourceModal.back": "← Kembali",
-  },
-  en: {
-    "home.kicker": "// portfolio 2026",
-    "home.greeting": "WELCOME to My Website!",
-    "home.subtitle":
-      "Fullstack developer  UI/UX designer. Straight to it — my projects and certificates are on the next walls.",
-    "home.cta.projects": "VIEW PROJECTS →",
-    "home.cta.certificates": "View Certificates →",
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.skill": "Skill",
-    "nav.project": "Project",
-    "nav.certificate": "Certificates",
-    "nav.sourceCode": "Source Code",
-    "nav.contact": "Contact",
-    "contact.kicker": "// let's connect",
-    "contact.heading": "HIT ME UP",
-    "contact.subtitle": "Got a project, job, or just want to chat about coding? Reach me through one of these.",
-    "contact.email": "Email",
-    "contact.github": "GitHub",
-    "contact.linkedin": "LinkedIn",
-    "contact.instagram": "Instagram",
-    "sourceModal.title": "OPEN GITHUB REPO?",
-    "sourceModal.desc":
-      "This opens this portfolio's GitHub repo in a new tab. You stay on this page.",
-    "sourceModal.continue": "CONTINUE",
-    "sourceModal.back": "← BACK",
-  },
-};
+// Helper untuk flatten per-file {id:{k:v}, en:{k:v}} jadi dict flat "home.kicker" -> "..."
+// Prefix diberikan sesuai file, kecuali common yang sudah pakai key lengkap "nav.home", "footer.madeWith" dll
+function flatten(prefix: string, obj: { id: Record<string, string>; en: Record<string, string> }) {
+  const out: Record<Language, Dictionary> = { id: {}, en: {} };
+  for (const [k, v] of Object.entries(obj.id)) out.id[`${prefix}.${k}`] = v;
+  for (const [k, v] of Object.entries(obj.en)) out.en[`${prefix}.${k}`] = v;
+  return out;
+}
+
+function merge(...dicts: Record<Language, Dictionary>[]): Record<Language, Dictionary> {
+  const res: Record<Language, Dictionary> = { id: {}, en: {} };
+  for (const d of dicts) {
+    Object.assign(res.id, d.id);
+    Object.assign(res.en, d.en);
+  }
+  return res;
+}
+
+// Gabungkan semua file lib/text/* — tetap berdampingan id/en per key di tiap file sumber
+const dict: Record<Language, Dictionary> = merge(
+  flatten("home", homeText),
+  flatten("about", aboutText),
+  flatten("skill", skillText),
+  flatten("project", projectText),
+  flatten("certificates", certificatesText),
+  flatten("contact", contactText),
+  // common sudah pakai key lengkap seperti "nav.home", "footer.madeWith", jadi tidak perlu prefix
+  { id: commonText.id, en: commonText.en }
+);
 
 type I18nContextType = {
   lang: Language;
@@ -101,3 +79,6 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 export function useI18n() {
   return useContext(I18nContext);
 }
+
+// Re-export text objects agar bisa dipakai langsung jika perlu (mis. homeText[lang].greeting)
+export { homeText, aboutText, skillText, projectText, certificatesText, contactText, commonText };

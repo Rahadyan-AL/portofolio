@@ -2,6 +2,7 @@
 
 import { MainLayout } from "@/components/layout/MainLayout";
 import { skillClusters, type SkillItem } from "@/data/skills";
+import { useI18n } from "@/lib/translations";
 
 function hexForColor(color: string): string {
   if (color.includes("gold")) return "FFC93C";
@@ -11,9 +12,6 @@ function hexForColor(color: string): string {
   return "F5F1E8";
 }
 
-// Inline fallback icons untuk slug yang 404 di cdn.simpleicons.org atau tidak ada di Simple Icons
-// Canva & VS Code ada di Simple Icons (jsDelivr) tapi 404 di cdn.simpleicons.org → pakai path asli agar tidak hilang
-// Matplotlib / Seaborn / Whimsical tidak ada di Simple Icons sama sekali → fallback generic chart/board
 function FallbackIcon({ skill, iconColor }: { skill: SkillItem; iconColor: string }) {
   const fill = `#${iconColor}`;
   switch (skill.name) {
@@ -68,12 +66,11 @@ function SkillIcon({ skill }: { skill: SkillItem }) {
     return (
       <img
         src={`https://cdn.simpleicons.org/${skill.iconSlug}/${iconColor}`}
-        alt=""
+        alt={`${skill.name} logo`}
         className="h-[1em] w-[1em] shrink-0"
         style={{ filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.45))" }}
         loading="lazy"
         onError={(e) => {
-          // jangan tampilkan broken image — sembunyikan, fallback akan tetap jaga layout
           (e.currentTarget as HTMLImageElement).style.display = "none";
         }}
       />
@@ -84,6 +81,8 @@ function SkillIcon({ skill }: { skill: SkillItem }) {
 }
 
 export default function SkillPage() {
+  const { t } = useI18n();
+
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1100px] px-10 pt-[48px] pb-[80px] max-[900px]:px-6 max-[900px]:pt-6 max-[900px]:pb-8">
@@ -91,13 +90,13 @@ export default function SkillPage() {
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          // senjata yang dipakai
+          {t("skill.kicker")}
         </span>
         <h1
           className="graffiti-heading mt-2 text-[clamp(34px,5vw,56px)]"
           style={{ fontFamily: "var(--font-bungee), cursive" }}
         >
-          SKILL
+          {t("skill.heading")}
         </h1>
 
         <div className="mt-10">
@@ -135,7 +134,6 @@ export default function SkillPage() {
             </div>
           ))}
         </div>
-
       </div>
     </MainLayout>
   );

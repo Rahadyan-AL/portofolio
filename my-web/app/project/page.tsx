@@ -3,11 +3,14 @@
 import { useRouter } from "next/navigation";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { projects } from "@/data/projects";
+import { useI18n } from "@/lib/translations";
 
 const ROTATIONS = ["-1.5deg", "1deg", "-0.8deg", "1.2deg", "-1deg"];
 
 export default function ProjectPage() {
   const router = useRouter();
+  const { t, lang } = useI18n();
+
   return (
     <MainLayout>
       <div className="mx-auto max-w-[1200px] px-10 py-[130px] max-[900px]:px-6 max-[900px]:py-8">
@@ -15,13 +18,13 @@ export default function ProjectPage() {
           className="text-[13px] tracking-[2px] uppercase text-[var(--pink)]"
           style={{ fontFamily: "var(--font-jetbrains), monospace" }}
         >
-          {/* karya-karya */}
+          {t("project.kicker")}
         </span>
         <h1
           className="graffiti-heading mt-2 text-[clamp(34px,5vw,56px)]"
           style={{ fontFamily: "var(--font-bungee), cursive" }}
         >
-          PROJECT
+          {t("project.heading")}
         </h1>
 
         <div className="mt-8 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-9 gap-x-9">
@@ -46,7 +49,7 @@ export default function ProjectPage() {
               <div className="mb-3.5 h-[150px] overflow-hidden rounded border border-white/10 bg-black/20">
                 <img
                   src={p.screenshot}
-                  alt={p.title}
+                  alt={`${p.title[lang]} screenshot`}
                   className="h-full w-full object-cover"
                   loading="lazy"
                   onError={(e) => {
@@ -61,9 +64,9 @@ export default function ProjectPage() {
                     className="text-[11px] leading-relaxed text-white/35"
                     style={{ fontFamily: "var(--font-jetbrains), monospace" }}
                   >
-                    THUMBNAIL
+                    {t("project.thumbnailFallback")}
                     <br />
-                    PROJECT DI SINI
+                    {t("project.thumbnailDesc")}
                     <br />
                     <span className="text-[10px] text-white/20">{p.screenshot}</span>
                   </span>
@@ -74,9 +77,9 @@ export default function ProjectPage() {
                 className="mb-2 text-[19px] leading-tight text-[var(--cream)]"
                 style={{ fontFamily: "var(--font-bungee), cursive", whiteSpace: "pre-line" }}
               >
-                {p.title}
+                {p.title[lang]}
               </div>
-              <p className="mb-3 text-[13px] leading-relaxed text-white/80">{p.description}</p>
+              <p className="mb-3 text-[13px] leading-relaxed text-white/80">{p.description[lang]}</p>
 
               <div className="mb-3.5 flex flex-wrap gap-2.5">
                 {p.techStack.map((tag) => (
@@ -99,7 +102,7 @@ export default function ProjectPage() {
                   onClick={(e) => e.stopPropagation()}
                   className="text-[13px] font-bold text-[var(--pink)] hover:underline"
                 >
-                  Lihat source code →
+                  {t("project.viewSource")}
                 </a>
                 {p.demoLink && (
                   <a
@@ -109,25 +112,18 @@ export default function ProjectPage() {
                     onClick={(e) => e.stopPropagation()}
                     className="text-[13px] font-bold text-[var(--gold)] hover:underline"
                   >
-                    Demo →
+                    {t("project.viewDemo")}
                   </a>
                 )}
               </div>
               <div className="absolute inset-0 flex items-end justify-end p-2 opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
                 <span className="rounded-full bg-white/10 px-2 py-1 text-[10px] tracking-widest text-white/70" style={{ fontFamily: "var(--font-jetbrains), monospace" }}>
-                  LIHAT DETAIL →
+                  {t("project.viewDetail")}
                 </span>
               </div>
             </div>
           ))}
         </div>
-
-        <p
-          className="mt-8 text-[11px] leading-relaxed text-white/25"
-          style={{ fontFamily: "var(--font-jetbrains), monospace" }}
-        >
-          Tambah project baru: edit <code className="text-white/40">data/projects.ts</code> — tambah 1 object.
-        </p>
       </div>
     </MainLayout>
   );
